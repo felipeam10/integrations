@@ -1,6 +1,7 @@
 package com.felipeam10.integrations.services;
 
 import com.felipeam10.integrations.dto.EmailDTO;
+import com.felipeam10.integrations.services.exceptions.EmailException;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
@@ -36,11 +37,12 @@ public class EmailService {
             Response response = sendGrid.api(request);
             if (response.getStatusCode() >= 400 && response.getStatusCode() <= 500) {
                 LOG.error("Error sending email: " + response.getBody());
-            }else {
-                LOG.info("Email sent successfully: " + response.getStatusCode());
+                throw new EmailException("Error sending email: " + response.getBody());
             }
+                LOG.info("Email sent successfully: " + response.getStatusCode());
+
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new EmailException("Error sending email: " + e.getMessage());
         }
     }
 }
