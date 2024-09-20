@@ -2,6 +2,7 @@ package com.felipeam10.integrations.controllers;
 
 import com.felipeam10.integrations.dto.EmailDTO;
 import com.felipeam10.integrations.services.EmailService;
+import com.felipeam10.integrations.services.SendGridEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
